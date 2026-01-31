@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Charlie's Boxing — Charlestown</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f0;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem 1.5rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('hero.png') center/cover no-repeat;
+      filter: brightness(0.4);
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding-bottom: 2rem;
+    }
+    .tagline {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #4CAF50;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 10vw, 4.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span {
+      color: #4CAF50;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #c0c0b8;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    /* CTA BUTTON */
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 1.2rem;
+      background: #4CAF50;
+      color: #0a0a0a;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cta:hover { background: #66BB6A; transform: scale(1.02); }
+    .cta:active { transform: scale(0.98); }
+
+    /* SECTIONS */
+    section {
+      padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+    .section-title span { color: #4CAF50; }
+
+    /* WHAT WE TEACH */
+    .values {
+      background: #111;
+    }
+    .value-card {
+      border-left: 3px solid #4CAF50;
+      padding: 1.2rem 1rem;
+      margin-bottom: 1.2rem;
+      background: rgba(255,255,255,0.03);
+    }
+    .value-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .value-card p {
+      font-size: 0.95rem;
+      color: #a0a098;
+      line-height: 1.5;
+    }
+
+    /* QUOTE */
+    .quote-section {
+      background: #0d1a0d;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .quote {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      line-height: 1.3;
+      color: #e0e0d8;
+      margin-bottom: 1rem;
+    }
+    .quote-author {
+      font-size: 0.9rem;
+      color: #4CAF50;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* PRICING */
+    .pricing {
+      background: #0a0a0a;
+    }
+    .price-card {
+      border: 2px solid #222;
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .price-card.featured {
+      border-color: #4CAF50;
+      background: rgba(76,175,80,0.05);
+    }
+    .price-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+    .price {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .price small { font-size: 1rem; color: #888; font-weight: 400; }
+    .price-desc {
+      font-size: 0.9rem;
+      color: #a0a098;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+    .price-features li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #1a1a1a;
+      font-size: 0.95rem;
+      color: #c0c0b8;
+    }
+    .price-features li::before {
+      content: '☘️ ';
+    }
+
+    /* ABOUT */
+    .about {
+      background: #111;
+    }
+    .about p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #b0b0a8;
+      margin-bottom: 1rem;
+    }
+    .about strong { color: #f5f5f0; }
+
+    /* STICKY CTA */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 1.5rem;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid #222;
+      z-index: 100;
+    }
+    .sticky-cta .cta {
+      margin: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem 6rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+    footer .shamrock { font-size: 2rem; margin-bottom: 0.5rem; }
+
+    /* Desktop tweaks */
+    @media (min-width: 768px) {
+      section { padding: 4rem 3rem; max-width: 600px; margin: 0 auto; }
+      .hero { padding: 3rem; }
+      .hero-content { max-width: 600px; }
+      .sticky-cta { max-width: 600px; left: 50%; transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="tagline">Charlestown · Est. 2025</div>
+      <h1>Raise <span>Fighters.</span><br>Not Followers.</h1>
+      <p>Old-school boxing for kids who need more than a screen. Discipline. Respect. Confidence. From the streets of Charlestown to wherever they want to go.</p>
+      <a href="#signup" class="cta">Book a Free Trial ☘️</a>
+    </div>
+  </div>
+
+  <!-- WHAT WE TEACH -->
+  <section class="values">
+    <h2 class="section-title">It's Not <span>Just</span> Boxing</h2>
+    
+    <div class="value-card">
+      <h3>🥊 Discipline</h3>
+      <p>Show up. Work hard. No shortcuts. The ring doesn't care about excuses and neither do we.</p>
+    </div>
+    <div class="value-card">
+      <h3>🛡️ Confidence</h3>
+      <p>A kid who knows they can handle themselves walks different. Talks different. Lives different.</p>
+    </div>
+    <div class="value-card">
+      <h3>🤝 Respect</h3>
+      <p>Respect the gym. Respect your opponent. Respect yourself. Everything else follows.</p>
+    </div>
+    <div class="value-card">
+      <h3>🏠 Community</h3>
+      <p>Charlestown takes care of its own. Your kid becomes part of something bigger than themselves.</p>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <div class="quote">"Everyone's got a plan until they get punched in the mouth."</div>
+    <div class="quote-author">— Mike Tyson</div>
+  </div>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <h2 class="section-title">Simple. <span>No BS.</span></h2>
+    
+    <div class="price-card">
+      <div class="price-label">Drop-In</div>
+      <div class="price">$15</div>
+      <div class="price-desc">Try before you commit. One session, no strings.</div>
+      <ul class="price-features">
+        <li>Single class</li>
+        <li>All equipment provided</li>
+        <li>Ages 6-16</li>
+      </ul>
+      <a href="#signup" class="cta" style="background:#333;color:#f5f5f0;">Try a Class</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-label">Monthly</div>
+      <div class="price">$99 <small>/mo</small></div>
+      <div class="price-desc">Unlimited classes. This is where fighters are made.</div>
+      <ul class="price-features">
+        <li>Unlimited classes</li>
+        <li>Personal progress tracking</li>
+        <li>Sparring sessions</li>
+        <li>Community events</li>
+        <li>First month — bring a mate free</li>
+      </ul>
+      <a href="#signup" class="cta">Join the Gym ☘️</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <h2 class="section-title">From <span>The Town</span></h2>
+    <p><strong>Charlie's Boxing</strong> started the way everything good in Charlestown starts — someone gave a shit.</p>
+    <p>We're not a franchise. We're not a fitness brand. We're a gym run by townies for the next generation. Your kid learns to throw a jab, sure. But they also learn to stand up, show up, and never back down.</p>
+    <p>The streets taught us. Now we teach them — <strong>the right way.</strong></p>
+  </section>
+
+  <!-- SIGNUP -->
+  <section id="signup" style="padding-bottom:6rem;">
+    <h2 class="section-title">Get Your Kid <span>In The Ring</span></h2>
+    <p style="color:#a0a098;margin-bottom:1.5rem;">Drop your number. We'll text you. No spam, no bullshit — just boxing.</p>
+    <form action="#" style="display:flex;flex-direction:column;gap:0.8rem;">
+      <input type="text" placeholder="Your kid's name" style="padding:1rem;background:#1a1a1a;border:1px solid #333;border-radius:4px;color:#f5f5f0;font-size:1rem;">
+      <input type="tel" placeholder="Your phone number" style="padding:1rem;background:#1a1a1a;border:1px solid #333;border-radius:4px;color:#f5f5f0;font-size:1rem;">
+      <select style="padding:1rem;background:#1a1a1a;border:1px solid #333;border-radius:4px;color:#f5f5f0;font-size:1rem;">
+        <option>Age: 6-8</option>
+        <option>Age: 9-11</option>
+        <option>Age: 12-14</option>
+        <option>Age: 15-16</option>
+      </select>
+      <button type="submit" class="cta">Book Free Trial ☘️</button>
+    </form>
+  </section>
+
+  <!-- STICKY CTA -->
+  <div class="sticky-cta">
+    <a href="#signup" class="cta">Book a Free Trial ☘️</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="shamrock">☘️</div>
+    Charlie's Boxing — Charlestown<br>
+    © 2025 · Townies Only
+  </footer>
+
+</body>
+</html>
